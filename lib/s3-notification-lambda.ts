@@ -18,6 +18,9 @@ export class S3NotificationLambda extends cdk.Construct {
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
+    /**
+     * Handler is responsible for forwarding the S3 event to the state machine.
+     */
     const notificationHandler = new nodeJsLambda.NodejsFunction(
       this,
       "notificationHandler",
@@ -40,7 +43,7 @@ export class S3NotificationLambda extends cdk.Construct {
     bucket.addEventNotification(
       s3.EventType.OBJECT_CREATED_PUT,
       new s3Notifications.LambdaDestination(notificationHandler),
-      { prefix: "uploadss/" }
+      { prefix: "uploads/" }
     );
   }
 }
