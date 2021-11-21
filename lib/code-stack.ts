@@ -7,6 +7,7 @@ import * as eventsTargets from "@aws-cdk/aws-events-targets";
 import { RegularCloudTrailSelector } from "./regular-cloudtrail-selector";
 import { AdvancedCloudTrailSelector } from "./advanced-cloudtrail-selector";
 import { S3NotificationLambda } from "./s3-notification-lambda";
+import { S3NotificationStorageFirst } from "./s3-notification-storage-first";
 
 export class CodeStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -15,5 +16,6 @@ export class CodeStack extends cdk.Stack {
     new RegularCloudTrailSelector(this, "regularEventSelector");
     new AdvancedCloudTrailSelector(this, "advancedEventSelector");
     new S3NotificationLambda(this, "s3NotificationLambda");
+    new S3NotificationStorageFirst(this, "s3StorageFirstLambda");
   }
 }

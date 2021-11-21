@@ -8,12 +8,10 @@ export const handler: S3Handler = async event => {
 
   const [record] = event.Records;
 
-  const result = await sfnClient.send(
+  await sfnClient.send(
     new StartExecutionCommand({
       stateMachineArn: process.env.STATE_MACHINE_ARN as string,
       input: JSON.stringify(record)
     })
   );
-
-  console.log(result);
 };
